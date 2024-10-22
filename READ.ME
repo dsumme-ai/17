@@ -1,0 +1,70 @@
+Bank Marketing Term Deposit Subscription Prediction
+Overview
+This project aims to predict whether a client will subscribe to a term deposit based on a range of demographic, socio-economic, and marketing data. The task is a binary classification problem where the target variable is whether the client subscribes (yes or no) to the term deposit.
+
+Dataset Description
+The dataset includes information about:
+
+Client-related attributes (e.g., age, job, marital status, education).
+Previous campaign data (e.g., number of contacts, previous outcomes).
+Social and economic context (e.g., employment variation rate, consumer price index).
+Key input variables:
+
+Age (numeric)
+Job (categorical)
+Marital Status (categorical)
+Education (categorical)
+Housing Loan (categorical)
+Personal Loan (categorical)
+Contact Type (categorical)
+Campaign Details (numeric)
+Social and Economic Indicators (numeric)
+Outcome of Previous Campaign (categorical)
+Target variable:
+
+y: Whether the client has subscribed to a term deposit (binary: 'yes', 'no').
+Task
+The primary task is to build models that can predict whether a client will subscribe to a term deposit based on the given features. We compare the performance of several models, perform feature scaling, engineer new features, and tune hyperparameters to improve model accuracy.
+
+Steps Taken
+Data Preprocessing:
+
+Categorical variables were one-hot encoded.
+Missing values were handled using the mean for numeric features and the most frequent value for categorical features.
+Feature Engineering:
+
+Standardization was applied to numeric features for models sensitive to feature scaling.
+Log transformation was applied to the pdays feature to handle skewness.
+Polynomial features (degree=2) were generated to capture non-linear relationships in the data.
+Model Selection: Four models were tested:
+
+Logistic Regression
+K-Nearest Neighbors (KNN)
+Support Vector Machine (SVM)
+Decision Tree (for comparison)
+Hyperparameter Tuning:
+
+Hyperparameter tuning for KNN was performed using GridSearchCV, optimizing the number of neighbors and the distance metric.
+Metrics
+The models were evaluated based on the following performance metrics:
+
+Train and Test Accuracy: Proportion of correct predictions.
+F1-Score: The harmonic mean of precision and recall, useful for imbalanced datasets.
+AUC-ROC: Area under the ROC curve, measuring the model's ability to distinguish between classes.
+Training Time: Time taken to train each model.
+Results Before Hyperparameter Tuning and Scaling
+Model	Train Time	Train Accuracy	Test Accuracy
+Logistic Regression	7.76 seconds	0.901184	0.896941
+K-Nearest Neighbors	0.05 seconds	0.914719	0.888322
+Decision Tree	0.54 seconds	0.995357	0.838553
+Support Vector Machine	34.34 seconds	0.898209	0.894756
+Results After Hyperparameter Tuning and Scaling (Including Polynomial Features)
+Model	Train Accuracy	Test Accuracy	F1-Score	AUC-ROC
+Logistic Regression	0.901335	0.897062	0.319422	0.780002
+K-Nearest Neighbors	0.912504	0.889900	0.368824	0.714865
+Support Vector Machine	0.903672	0.897427	0.319098	0.699183
+Conclusion
+Logistic Regression and Support Vector Machines offer strong generalization with balanced accuracy and AUC-ROC.
+K-Nearest Neighbors, with an F1-score of 0.368, outperformed Logistic Regression (0.319) in handling the imbalance between the positive and negative classes.
+Decision Trees performed well on training data but overfitted, as indicated by the drop in test accuracy.
+Overall, K-Nearest Neighbors achieved the best F1-score and might be the best choice when focusing on minimizing false positives and false negatives. However, Logistic Regression and SVM provide faster training and comparable accuracy, making them robust models for generalization.
